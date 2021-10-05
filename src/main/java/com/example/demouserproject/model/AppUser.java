@@ -14,13 +14,13 @@ import java.util.UUID;
 @ToString
 @Builder(toBuilder = true)
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Table (name = "APP_USER")
-public class User {
+@AllArgsConstructor
+@Table (name = "app_user")
+public class AppUser {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "id")
     UUID id;
     String firstName;
     String middleName;
@@ -32,8 +32,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        AppUser appUser = (AppUser) o;
+        return Objects.equals(id, appUser.id);
     }
 
     @Override
