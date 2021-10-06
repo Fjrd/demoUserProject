@@ -20,12 +20,20 @@ public class AppUser {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    @Column(name = "id")
     UUID id;
+
+    @Column(nullable = false)
     String firstName;
+
     String middleName;
+
+    @Column(nullable = false)
     String lastName;
+
+    @Column(nullable = false, unique = true)
     String email;
+
+    @Column(nullable = false)
     String password;
 
     @Override
