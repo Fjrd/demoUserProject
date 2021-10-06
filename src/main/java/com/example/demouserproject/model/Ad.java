@@ -27,7 +27,6 @@ public class Ad {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    @Column(nullable = false)
     AppUser owner;
 
     LocalDateTime publishedAt;

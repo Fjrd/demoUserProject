@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -35,6 +36,10 @@ public class AppUser {
 
     @Column(nullable = false)
     String password;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "owner")
+    List<Ad> ads;
 
     @Override
     public boolean equals(Object o) {
