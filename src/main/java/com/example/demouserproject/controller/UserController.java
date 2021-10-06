@@ -41,7 +41,6 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<AppUser> replaceUser(@PathVariable UUID id, @RequestBody AppUser userDetails){
-        //TODO mapper
         try{
             AppUser user = userService.update(userDetails);
             return ResponseEntity.ok().body(user);
@@ -54,8 +53,7 @@ public class UserController {
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteUserById(@PathVariable UUID id){
         try{
-            AppUser user = userService.findByID(id);
-            userService.delete(user);
+            userService.delete(id);
             return ResponseEntity.ok().build();
         }
         catch (ResourceNotFoundException ex){

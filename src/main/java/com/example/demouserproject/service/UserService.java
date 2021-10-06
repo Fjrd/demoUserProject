@@ -33,22 +33,20 @@ public class UserService {
     }
 
     @Transactional
-    public AppUser update(AppUser appUser){
-        if (isExists(appUser.getId())) {
-            userRepository.save(appUser);
-            return userRepository.findById(appUser.getId())
-                    .orElseThrow(() -> new ResourceNotFoundException(appUser.getId().toString()));
+    public AppUser update(AppUser user){
+        if (userRepository.existsById(user.getId())) {
+            userRepository.save(user);
+            return userRepository.getById(user.getId());
         }
-        else throw new ResourceNotFoundException(appUser.getId().toString());
+        else throw new ResourceNotFoundException(user.getId().toString());
     }
 
     @Transactional
-    public void delete(AppUser appUser){
-        userRepository.delete(appUser);
-    }
-
-    @Transactional
-    public boolean isExists(UUID id){
-        return userRepository.existsById(id);
+    public void delete(UUID id){
+        if (userRepository.existsById(id)){
+            AppUser user = userRepository.getById(id);
+            userRepository.delete(user);
+        }
+        else throw new ResourceNotFoundException(id.toString());
     }
 }
