@@ -1,9 +1,9 @@
 package com.example.demouserproject.service;
 
-import com.example.demouserproject.UserNotFoundExeption;
 import com.example.demouserproject.model.AppUser;
 import com.example.demouserproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +24,7 @@ public class UserService {
     @Transactional
     public AppUser findByID(UUID id){
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundExeption(id));
+                .orElseThrow(() -> new ResourceNotFoundException(id.toString()));
     }
 
     @Transactional
@@ -34,9 +34,12 @@ public class UserService {
 
     @Transactional
     public AppUser update(AppUser appUser){
-        userRepository.save(appUser);
-        return userRepository.findById(appUser.getId())
-                .orElseThrow(() -> new UserNotFoundExeption(appUser.getId()));
+        if (isExists(appUser.getId())) {
+            userRepository.save(appUser);
+            return userRepository.findById(appUser.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException(appUser.getId().toString()));
+        }
+        else throw new ResourceNotFoundException(appUser.getId().toString());
     }
 
     @Transactional
@@ -48,6 +51,4 @@ public class UserService {
     public boolean isExists(UUID id){
         return userRepository.existsById(id);
     }
-
-
 }
