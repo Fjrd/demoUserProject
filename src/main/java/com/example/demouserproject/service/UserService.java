@@ -44,5 +44,10 @@ public class UserService {
         userRepository.delete(appUser);
     }
 
+    @Transactional
+    public boolean isExists(UUID id){
+        return userRepository.existsById(id);
+    }
+
 
 }
