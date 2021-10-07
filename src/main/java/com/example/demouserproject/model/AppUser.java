@@ -1,10 +1,13 @@
 package com.example.demouserproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,6 +18,7 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Validated
 @Table (name = "app_user")
 public class AppUser {
 
@@ -35,6 +39,11 @@ public class AppUser {
 
     @Column(nullable = false)
     String password;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "owner")
+    @JsonBackReference
+    List<Ad> ads;
 
     @Override
     public boolean equals(Object o) {
