@@ -1,6 +1,5 @@
 package com.example.demouserproject.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -33,7 +32,6 @@ public class Ad {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    @JsonManagedReference
     AppUser owner;
 
     @Column(nullable = false)

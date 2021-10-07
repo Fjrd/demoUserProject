@@ -25,8 +25,9 @@ public class AdController {
     }
 
     @PostMapping
-    public ResponseEntity<Ad> newAd(@RequestBody @Valid Ad ad){
-        return ResponseEntity.ok(adService.create(ad));
+    public ResponseEntity<Ad> newAd(@RequestBody @Valid Ad newAd){
+        Ad ad = adService.create(newAd);
+        return ResponseEntity.ok(ad);
     }
 
     @GetMapping("{id}")
@@ -41,7 +42,7 @@ public class AdController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Ad> replaceAd(@PathVariable UUID id, @RequestBody Ad adDetails){
+    public ResponseEntity<Ad> replaceAd(@PathVariable UUID id, @RequestBody @Valid Ad adDetails){
         try{
             Ad ad = adService.update(id, adDetails);
             return ResponseEntity.ok().body(ad);
