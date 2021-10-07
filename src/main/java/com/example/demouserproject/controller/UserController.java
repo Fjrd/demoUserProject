@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AppUser> replaceUser(@PathVariable UUID id, @RequestBody AppUser userDetails){
+    public ResponseEntity<AppUser> replaceUser(@PathVariable UUID id, @RequestBody @Valid AppUser userDetails){
         try{
             AppUser user = userService.update(id, userDetails);
             return ResponseEntity.ok().body(user);
