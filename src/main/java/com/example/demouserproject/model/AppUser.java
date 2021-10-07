@@ -1,6 +1,7 @@
 package com.example.demouserproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -39,6 +40,7 @@ public class AppUser {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "owner")
+    @JsonBackReference
     List<Ad> ads;
 
     @Override

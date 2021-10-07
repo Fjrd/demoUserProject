@@ -33,12 +33,13 @@ public class UserService {
     }
 
     @Transactional
-    public AppUser update(AppUser user){
-        if (userRepository.existsById(user.getId())) {
+    public AppUser update(UUID id, AppUser userDetails){
+        if (userRepository.existsById(id)) {
+            AppUser user = userDetails.toBuilder().id(id).build();
             userRepository.save(user);
             return userRepository.getById(user.getId());
         }
-        else throw new ResourceNotFoundException(user.getId().toString());
+        else throw new ResourceNotFoundException(id.toString());
     }
 
     @Transactional

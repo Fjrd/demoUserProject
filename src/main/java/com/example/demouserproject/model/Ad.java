@@ -1,5 +1,6 @@
 package com.example.demouserproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @ToString
 @Builder(toBuilder = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @Table (name = "ad")
 @Validated
 public class Ad {
@@ -25,9 +27,20 @@ public class Ad {
     @Column(nullable = false)
     AdStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    AdCategory category;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonManagedReference
     AppUser owner;
+
+    @Column(nullable = false)
+    String address;
+
+    @Column(nullable = false)
+    String text;
 
     LocalDateTime publishedAt;
 }

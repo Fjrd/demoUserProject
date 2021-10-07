@@ -33,12 +33,13 @@ public class AdService {
     }
 
     @Transactional
-    public Ad update(Ad ad){
-        if (adRepository.existsById(ad.getId())) {
+    public Ad update(UUID id, Ad adDetails){
+        if (adRepository.existsById(id)) {
+            Ad ad = adDetails.toBuilder().id(id).build();
             adRepository.save(ad);
-            return adRepository.getById(ad.getId());
+            return adRepository.getById(id);
         }
-        else throw new ResourceNotFoundException(ad.getId().toString());
+        else throw new ResourceNotFoundException(id.toString());
     }
 
     @Transactional
