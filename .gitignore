@@ -31,3 +31,20 @@ build/
 
 ### VS Code ###
 .vscode/
+/client/ext/
+
+### EXTJS ###
+client/.architect
+client/bootstrap.css
+client/bootstrap.js
+client/bootstrap.json
+client/bootstrap.jsonp
+client/build/
+client/classic.json
+client/classic.jsonp
+client/ext/
+client/modern.json
+client/modern.jsonp
+client/resources/sass/.sass-cache/
+client/resources/.arch-internal-preview.css
+client/.arch-internal-preview.css
