@@ -12,6 +12,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Stream;
+
 @Component
 @RequiredArgsConstructor
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -22,17 +24,34 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        AppUser user = AppUser.builder()
+        AppUser user1 = AppUser.builder()
                 .firstName("Ivan")
                 .middleName("Ivanovich")
                 .lastName("Ivanov")
-                .email("email@email.com")
-                .password("password")
+                .email("ivan@email.com")
+                .password("vanya123")
                 .build();
-        user = userRepository.save(user);
+
+        AppUser user2 = AppUser.builder()
+                .firstName("Petr")
+                .middleName("Petrovich")
+                .lastName("Petrov")
+                .email("petr@email.com")
+                .password("petya123")
+                .build();
+
+        AppUser user3 = AppUser.builder()
+                .firstName("Sidor")
+                .middleName("Sidorovich")
+                .lastName("Sidorov")
+                .email("sidor@email.com")
+                .password("sidorushka123")
+                .build();
+
+        Stream.of(user1, user2, user3).forEach(userRepository::save);
 
         Ad ad = Ad.builder()
-                .owner(user)
+                .owner(user1)
                 .status(AdStatus.DRAFT)
                 .address("SPB, Nevskiy pr., 1, 1")
                 .category(AdCategory.ELECTRONICS)
