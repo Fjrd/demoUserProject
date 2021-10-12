@@ -1,4 +1,4 @@
-Ext.define('Users.model.UsersModel', {
+Ext.define('Ads.model.AdsModel', {
     extends: 'Ext.data.Model',
 
     requires: [
@@ -12,31 +12,25 @@ Ext.define('Users.model.UsersModel', {
         },
         {
             type: 'string',
-            name: 'firstName'
+            name: 'status'
         },
         {
             type: 'string',
-            name: 'middleName'
+            name: 'category'
         },
         {
             type: 'string',
-            name: 'lastName'
+            name: 'owner'
+            //type
         },
         {
             type: 'string',
-            name: 'email'
+            name: 'address'
         },
         {
             type: 'string',
-            name: 'password'
-        },
-        {
-            type: 'auto',
-            name: 'ads'
+            name: 'text'
         }
-
-
-        //ads
 
     ]
 

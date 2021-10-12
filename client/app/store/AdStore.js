@@ -1,10 +1,10 @@
-Ext.define('client.store.UsersStore', {
+Ext.define('client.store.AdsStore', {
     extend: 'Ext.data.Store',
 
-    alias: 'store.usersStore',
+    alias: 'store.adsStore',
 
     requires: [
-        'Users.model.UsersModel',
+        'Ads.model.AdsModel',
         'Ext.data.proxy.Ajax',
         'Ext.data.reader.Json'
     ],
@@ -13,11 +13,11 @@ Ext.define('client.store.UsersStore', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            storeId: 'UsersStore',
+            storeId: 'AdsStore',
             autoLoad: true,
             proxy: {
                 type: 'ajax',
-                url: 'http://localhost:8080/api/users',
+                url: 'http://localhost:8080/api/ads',
                 reader: {
                     type: 'json'
                 }

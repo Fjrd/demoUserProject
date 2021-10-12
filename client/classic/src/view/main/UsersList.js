@@ -1,6 +1,6 @@
 Ext.define('client.view.main.UsersList', {
     extend: 'Ext.grid.Panel',
-    xtype: 'mainlist',
+    xtype: 'userslist',
 
     requires: [
         'client.store.UsersStore'
@@ -18,7 +18,8 @@ Ext.define('client.view.main.UsersList', {
         { text: 'middleName', dataIndex: 'middleName', flex: 1 },
         { text: 'lastName', dataIndex: 'lastName', flex: 1 },
         { text: 'email', dataIndex: 'email', flex: 1 },
-        { text: 'password', dataIndex: 'password', flex: 1 }
+        { text: 'password', dataIndex: 'password', flex: 1 },
+        { text: 'ads', dataIndex: 'ads', flex: 1 }
         //ads
     ],
 

@@ -17,6 +17,23 @@
         <java.version>1.8</java.version>
         <springdoc-openapi.version>1.5.10</springdoc-openapi.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

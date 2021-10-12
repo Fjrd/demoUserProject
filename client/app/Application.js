@@ -14,7 +14,7 @@ Ext.define('client.Application', {
     
     launch: function () {
         // TODO - Launch the application
-        debugger;
+        // debugger;
     },
 
     onAppUpdate: function () {
