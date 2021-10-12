@@ -34,8 +34,6 @@ Ext.define('Users.model.UsersModel', {
             type: 'auto',
             name: 'ads'
         }
-
-
         //ads
 
     ]

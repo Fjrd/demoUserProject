@@ -85,8 +85,8 @@ Ext.define('client.view.main.Main', {
     }, {
         title: 'Ads',
         iconCls: 'fa-home',
-        // items: [{
-        //     xtype: 'adslist'
-        // }]
+        items: [{
+            xtype: 'adslist'
+        }]
     }]
 });
