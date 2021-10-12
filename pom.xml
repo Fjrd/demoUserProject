@@ -16,7 +16,38 @@
     <properties>
         <java.version>1.8</java.version>
         <springdoc-openapi.version>1.5.10</springdoc-openapi.version>
+
+        <senchaCommand>sencha</senchaCommand>
+        <sencha.app.build.phase>prepare-package</sencha.app.build.phase>
+        <sencha.app.clean.development>clean</sencha.app.clean.development>
+        <sencha.app.clean>clean</sencha.app.clean>
+        <sencha.app.build.profile>production</sencha.app.build.profile>
+
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+                <sencha.app.build.phase>none</sencha.app.build.phase>
+                <sencha.app.clean.development>none</sencha.app.clean.development>
+                <sencha.app.clean>none</sencha.app.clean>
+                <copy.file.phase>none</copy.file.phase>
+                <codegen>none</codegen>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -82,6 +113,95 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <!-- REFRESH SENCHA REPO -->
+                    <execution>
+                        <id>sencha-app-repo-sync-development</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>${sencha.app.clean.development}</phase>
+                        <configuration>
+                            <executable>${senchaCommand}</executable>
+                            <workingDirectory>${basedir}/client/apps/FssArmApp</workingDirectory>
+                            <arguments>
+                                <argument>repo</argument>
+                                <argument>sync</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <!-- REFRESH REMOTE PACKAGES -->
+                    <execution>
+                        <id>sencha-app-refresh-package-development</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>${sencha.app.clean.development}</phase>
+                        <configuration>
+                            <executable>${senchaCommand}</executable>
+                            <workingDirectory>${basedir}/client/apps/FssArmApp</workingDirectory>
+                            <arguments>
+                                <argument>app</argument>
+                                <argument>refresh</argument>
+                                <argument>-package</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sencha-app-clean-development</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>${sencha.app.clean.development}</phase>
+                        <configuration>
+                            <executable>${senchaCommand}</executable>
+                            <workingDirectory>${basedir}/client/apps/FssArmApp</workingDirectory>
+                            <arguments>
+                                <argument>app</argument>
+                                <argument>clean</argument>
+                                <argument>development</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sencha-app-clean</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>${sencha.app.clean}</phase>
+                        <configuration>
+                            <executable>${senchaCommand}</executable>
+                            <workingDirectory>${basedir}/client/apps/FssArmApp</workingDirectory>
+                            <arguments>
+                                <argument>app</argument>
+                                <argument>clean</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <!-- BUILDING WITH SENCHA CMD -->
+                    <execution>
+                        <id>sencha-app-build-apps-FssArmApp</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>${sencha.app.build.phase}</phase>
+                        <configuration>
+                            <executable>${senchaCommand}</executable>
+                            <workingDirectory>${basedir}/client/apps/FssArmApp</workingDirectory>
+                            <arguments>
+                                <argument>app</argument>
+                                <argument>build</argument>
+                                <argument>${sencha.app.build.profile}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
