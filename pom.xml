@@ -17,6 +17,30 @@
         <java.version>1.8</java.version>
         <springdoc-openapi.version>1.5.10</springdoc-openapi.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+                <sencha.app.build.phase>none</sencha.app.build.phase>
+                <sencha.app.clean.development>none</sencha.app.clean.development>
+                <sencha.app.clean>none</sencha.app.clean>
+                <copy.file.phase>none</copy.file.phase>
+                <codegen>none</codegen>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
